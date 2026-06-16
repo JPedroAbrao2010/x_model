@@ -122,3 +122,93 @@ function criarArquivoJSON() {
   // Libera a memória
   URL.revokeObjectURL(url);
 }
+
+/* função dos botões extras escondidos */
+function toggleMenu() {
+  const menu = document.getElementById("menu-extra");
+
+  if (menu.style.display == "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+}
+
+/* função do menu de funções extras */
+function toggleMenuconfig() {
+  const menu = document.getElementById("menu-configuracao");
+
+  if (menu.style.display == "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+}
+
+/* função editar mensagem */
+function editarMensagem(elemento) {
+  let textoAtual = elemento.innerText;
+
+  let novoTexto = prompt("Edit message:", textoAtual);
+
+  if (novoTexto == null) {
+    return;
+  }
+
+  elemento.innerText = novoTexto;
+
+  enviarMensagemEditada(novoTexto);
+}
+
+/* função de enviar nova mensagem editada */
+async function enviarMensagemEditada(texto) {
+  const resposta = await fetch("http://127.0.0.1:8000/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      texto: texto,
+    }),
+  });
+
+  const dados = await resposta.json();
+
+  adicionarMensagem(dados.resposta, "bot");
+}
+
+/* função de enviar arquivo de texto */
+async function enviarArquivo() {
+  const arquivo = document.getElementById("arquivo").files[0];
+
+  if (!arquivo) {
+    alert("Select a file");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("arquivo", arquivo);
+
+  const resposta = await fetch("http://127.0.0.1:8000/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  const dados = await resposta.json();
+
+  console.log(dados);
+  alert(dados.mensagem);
+}
+
+/* função de alertar o usuário sobre o que analisar sobre o arquivo */
+
+const botaoclicado = document.getElementById("btn-upload");
+
+botaoclicado.addEventListener("click", () => {
+  if (sessionStorage.getItem("btn-upload") !== "sim") {
+    alert("fazendo upload");
+    sessionStorage.setItem("btn-upload", "sim");
+  } else {
+    console.log("O alerta já foi exibido nesta sessão. Nada acontece.");
+  }
+});
