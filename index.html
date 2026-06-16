@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ChatBot X-model</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <h2>X-model</h2>
+      <button type="button" class="configuracao" onclick="toggleMenuconfig()">⚙️</button>
+      <ul id="menu-configuracao">
+
+        <li><button onclick="trocarTema()" class="trocar-tema">🌙 Tema</button></li>
+        <div id="conteudo"></div>
+
+      </ul> 
+
+    </header>
+
+    <main>
+      <div class="chat-messages" id="chat-messages">
+        <div class="mensagem bot">Hi! how can I help you today?</div>
+      </div>
+
+      <section class="input-area">
+        <textarea placeholder="ask something..." class="entrada" id="msg"></textarea>
+        <button type="button" class="botao" onclick="enviar()">↑</button>
+
+        <button type="button" class="menu-btn" onclick="toggleMenu()">+</button>
+
+        <ul id="menu-extra">
+          <li><label id="btn-upload" onclick="alertarusuaro()" for="arquivo" class="upload-arquivo">📎</label></li>
+
+          <li>
+            <button type="button" class="editarmensagem" onclick="editarMensagem('msg')">✏️</button>
+          </li>
+
+          <li>
+            <input
+              type="file"
+              class="input-oculto"
+              placeholder="select a arquive"
+              id="arquivo"
+            />
+            <button type="button" class="enviararquivo" onclick="enviarArquivo()">➤</button>
+          </li>
+        </ul>
+
+      </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+    <script src="/static/envarq.js"></script>
+    <script src="/static/editmensa.js"></script>
+    <script src="/static/btnextra.js"></script>
+  </body>
+</html>
