@@ -212,3 +212,43 @@ botaoclicado.addEventListener("click", () => {
     console.log("O alerta já foi exibido nesta sessão. Nada acontece.");
   }
 });
+
+
+// Função auxiliar para impedir a rolagem
+function bloquearScroll(event) {
+    event.preventDefault();
+}
+
+// Controla o menu de configurações (⚙️)
+function toggleMenuconfig() {
+    const menu = document.getElementById('menu-configuracao');
+    menu.classList.toggle('ativo'); // Supondo que você usa uma classe para mostrar/esconder
+
+    atualizarBloqueioScroll();
+}
+
+// Controla o menu extra (+)
+function toggleMenu() {
+    const menu = document.getElementById('menu-extra');
+    menu.classList.toggle('ativo'); // Supondo que você usa uma classe para mostrar/esconder
+
+    atualizarBloqueioScroll();
+}
+
+// Verifica se algum menu está aberto e aplica o bloqueio no body
+function actualizarBloqueioScroll() {
+    const menuConfig = document.getElementById('menu-configuracao');
+    const menuExtra = document.getElementById('menu-extra');
+
+    // Verifica se algum dos menus contém a classe que o torna visível
+    // (Ajuste '.ativo' para a classe real que você usa no seu CSS para exibir o menu)
+    const algumMenuAberto = menuConfig.classList.contains('ativo') || menuExtra.classList.contains('ativo');
+
+    if (algumMenuAberto) {
+        document.body.addEventListener('wheel', bloquearScroll, { passive: false });
+        document.body.addEventListener('touchmove', bloquearScroll, { passive: false }); // Bloqueia no celular também
+    } else {
+        document.body.removeEventListener('wheel', bloquearScroll, { passive: false });
+        document.body.removeEventListener('touchmove', bloquearScroll, { passive: false });
+    }
+}
