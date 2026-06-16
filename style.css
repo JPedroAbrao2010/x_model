@@ -378,3 +378,52 @@ button:hover {
     height: 30px;
   }
 }
+
+/* Responsividade específica para Samsung Galaxy A34 (412px x 915px) */
+@media (min-width: 390px) and (max-width: 420px) {
+  h2 {
+    font-size: 32px; /* Reduz ligeiramente para não ocupar espaço excessivo no topo */
+  }
+
+  /* Ajusta a área de input para aproveitar a tela ligeiramente mais larga */
+  .input-area {
+    gap: 6px; 
+    padding: 10px;
+  }
+
+  /* Botões principais com toque mais confortável */
+  button {
+    width: 55px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  /* Botão de engrenagem do topo */
+  .configuracao {
+    width: 44px;
+    height: 36px;
+  }
+
+  /* Área de texto ganha um pouco mais de altura útil */
+  input,
+  textarea {
+    font-size: 16px; /* Evita que o zoom automático do navegador aconteça no Android */
+    height: 50px;
+  }
+
+  /* Mensagens do chat com melhor aproveitamento lateral */
+  .mensagem {
+    max-width: 85%;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* Ajuste fino nos botões do menu extra (+) */
+  .upload-arquivo,
+  .enviararquivo,
+  .editarmensagem {
+    width: 40px;
+    height: 36px;
+    font-size: 15px;
+  }
+}
